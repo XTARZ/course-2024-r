@@ -12,6 +12,7 @@ pdf_parsed_path <- "Data/pdfs/parsed/"
 # number of CPU cores to use for parsing
 n_cores <- 4
 
+
 # create nessesary folders
 dir.create(data_path, recursive = TRUE, showWarnings = FALSE)
 dir.create(model_path, recursive = TRUE, showWarnings = FALSE)
