@@ -50,6 +50,38 @@ git config --global user.email i@xtarz.cn
 
 其中，`XTARZ` 和 `i@xtarz.cn` 分别是Github的用户名和邮箱
 
+
+
+
+
 ## 克隆所需代码库
 
-记得使用ssh连接
+记得使用ssh连接地址
+
+
+
+## Linux 常用指令
+
+```bash
+cd #（change directory）更改目录
+   # cd <dir-name>
+
+mkdir # 创建目录
+     # mkdir <dir-name>
+touch # 创建文件，Windows下使用 ni
+cp # 复制文件
+   # cp <source> <target>
+mv # 移动（重命名）文件
+   # mv <source> <target>
+rm # 删除文件
+ls # 显示当前目录下的文件
+```
+
+Linux 常用目录
+
+```bash
+cd / #根目录
+cd ~ #家目录（主目录）
+cd . #当前目录
+cd .. # 上层目录
+```
