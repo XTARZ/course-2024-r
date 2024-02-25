@@ -38,3 +38,15 @@ cat .ssh/id_rsa.pub
 ```
 
 可以显示公钥内容
+
+将公钥添加到Github的个人公钥列表中 https://github.com/settings/keys 
+
+接着在终端中输入
+
+```
+git config --global user.name XTARZ
+git config --global user.name XTARZ
+```
+
+其中，`XTARZ` 和 `i@xtarz.cn` 分别是Github的用户名和邮箱
+
