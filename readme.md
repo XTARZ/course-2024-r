@@ -45,8 +45,11 @@ cat .ssh/id_rsa.pub
 
 ```
 git config --global user.name XTARZ
-git config --global user.name XTARZ
+git config --global user.email i@xtarz.cn
 ```
 
 其中，`XTARZ` 和 `i@xtarz.cn` 分别是Github的用户名和邮箱
 
+## 克隆所需代码库
+
+记得使用ssh连接
