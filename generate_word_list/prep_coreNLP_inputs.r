@@ -10,16 +10,9 @@ prep_inputs <- function(x) {
 
     all_Presentation <- list()
 
-    for(single_csv_file in csv_files) {
-        single_dataframe = read.csv(single_csv_file)
+    for (single_csv_file in csv_files) {
+        single_dataframe <- read.csv(single_csv_file)
     }
-
-
-
-
-
-
-
 
     return()
 }
