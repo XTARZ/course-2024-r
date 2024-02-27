@@ -33,25 +33,6 @@ https://mirrors.tuna.tsinghua.edu.cn/help/anaconda/
 https://mirrors.tuna.tsinghua.edu.cn/help/pypi/
 
 
-### 安装 R
-
-```bash
-# update indices
-sudo apt update -qq
-# install two helper packages we need
-sudo apt install --no-install-recommends software-properties-common dirmngr
-# add the signing key (by Michael Rutter) for these repos
-# To verify key, run gpg --show-keys /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc 
-# Fingerprint: E298A3A825C0D65DFD57CBB651716619E084DAB9
-wget -qO- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo tee -a /etc/apt/trusted.gpg.d/cran_ubuntu_key.asc
-# add the R 4.0 repo from CRAN -- adjust 'focal' to 'groovy' or 'bionic' as needed
-sudo add-apt-repository "deb https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/"
-```
-
-```bash
-sudo apt install --no-install-recommends r-base
-```
-
 ### 安装 Anaconda（Miniconda）
 
 官方仓库 https://repo.anaconda.com/  
@@ -104,6 +85,42 @@ git config --global user.email i@xtarz.cn
 记得使用ssh连接地址
 
 
+### 准备运行环境
+
+#### 创建新的 conda 环境
+
+目录下
+```bash
+conda create -n python37 python=3.7
+```
+> 其中，`python37` 是环境名称，可以自己设置
+
+完成后激活该环境
+```bash
+conda activate python37
+```
+
+看到终端命令提示左边多出了 `(python37)` 字样即为激活成功
+
+#### 安装 R、OpenJDK
+
+在激活的环境下
+
+```bash
+conda install r openjdk
+```
+
+#### 安装 pip 需求
+
+```bash
+pip install -r requirements.txt
+```
+
+#### 安装 R 需求
+
+```bash
+Rscript topic_model/install_req_libs.R
+```
 
 ## Linux 常用指令
 
