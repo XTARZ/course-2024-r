@@ -50,8 +50,55 @@ all_transcripts <-
     ),
   ]
 
+# 新增一个列，名为 Paragraph_ID 每列的内容是对应列的 call_title_date--ROUND--Paragraph
+# 举例："Bank7 Corp., Q1 2020 Earnings Call, Apr 30, 2020 2020-04-30--QA--7"
+all_transcripts$"Paragraph_ID" <-
+  paste(
+    all_transcripts$"call_title_date",
+    "--",
+    all_transcripts$"ROUND",
+    "--",
+    all_transcripts$"Paragraph",
+    sep = ""
+  )
+
+# 将metadata_clean装载为DF
+# only use US earnings calls (hand-collected and checked)
+cleaned_meta <-
+  read.csv(
+    paste(getwd(), "/meta_data_cleaned.csv", sep = "")
+  )
+
+# 新增一个列，名为 call_title_date每列的内容是对应列的 call_title拼接日期
+cleaned_meta$"call_title_date" <-
+  paste(
+    cleaned_meta$"call_title",
+    " ",
+    # date_EST 形如 4/9/20，转换为2020-04-09
+    format(
+      as.POSIXlt(cleaned_meta$"date_EST", format = "%m/%d/%y"),
+      "%Y-%m-%d"
+    ),
+    sep = ""
+  )
 
 
+# 将 cleaned_meta 中，call_title_data 值重复的条目删掉
+# cleaned_meta <- duplicated(cleaned_meta$"call_title_date")
+# 待完善
+
+
+# 新增一个列，include_sample ，值为1
+cleaned_meta$"include_sample" <- 1
+
+# 仅取call_title_date 和 include_sample 两列，组成一个序列
+cleaned_meta <- cleaned_meta[, c("call_title_date", "include_sample")]
+
+# 挑选all_transcripts中call_title_date 相等的列，将对应的include_sample值填入
+all_transcripts <- merge(
+  x = all_transcripts,
+  y = cleaned_meta,
+)
 
 
 
