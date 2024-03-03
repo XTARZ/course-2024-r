@@ -12,9 +12,18 @@ csv_files <- list.files(
 )
 
 # prepare var to store data
-all_QA <- list()
-all_Presentation <- list()
-all_transcripts <- list()
+all_transcripts <- read.csv(csv_files[1])
+# df = Title,ROUND......text
+#      aaa,QA,textext
+#    ....
+all_transcripts$"call_title_date" <- NA
+# df = Title,ROUND......text,call_title_date
+#      aaa,QA,textext
+#    ....
+all_transcripts <- all_transcripts[0, !names(all_transcripts) == "Title"]
+
+# df = ROUND......text,call_title_date
+#
 
 for (single_call_csv in csv_files) {
   # read silgle csv into df
@@ -23,14 +32,26 @@ for (single_call_csv in csv_files) {
   # 插入一列名为call_title_date,内容是当前csv的文件名不含扩展
   call_csv_dataframe$"call_title_date" <-
     tools::file_path_sans_ext(single_call_csv)
+
   # 删除名为 Title的列
   # 实际操作是，将所有列提取出来，除了 Title 列以外，并装回原变量里
   call_csv_dataframe <-
     call_csv_dataframe[, !names(call_csv_dataframe) == "Title"]
-
-  all_transcripts[[length(all_transcripts) + 1]] <- call_csv_dataframe
+  # concat call_csv_dataframe to all_transcripts
+  all_transcripts <- rbind(all_transcripts, call_csv_dataframe)
 }
-print(all_transcripts)
+# 以"call_title_date", "ROUND", "Paragraph"为顺序进行排列
+all_transcripts <-
+  all_transcripts[
+    order(
+      all_transcripts$call_title_date,
+      all_transcripts$ROUND,
+      all_transcripts$Paragraph
+    ),
+  ]
+
+
+
 
 
 
@@ -69,5 +90,3 @@ print(all_transcripts)
 #   sep = ""
 # )
 # print(cleaned_meta)
-
-prep_inputs()
