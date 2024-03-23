@@ -1,5 +1,5 @@
 # 1. 文件创建的位置不对
-# 2. 产生数据的顺序不完全相同 
+# 2. 产生数据的顺序不完全相同
 # 3. 时间处理需要采用绝对时间戳
 
 
@@ -7,7 +7,7 @@ prep_inputs <- function() {
   library(tools)
   # goto data location
   setwd(
-    "/home/xtarz/course/The-Role-of-Corporate-Culture-in-Bad-Times/data/"
+    "/home/xtarz/course/The-Role-of-Corporate-Culture-in-Bad-Times/data"
   )
 
   # read all csv_files
@@ -16,6 +16,7 @@ prep_inputs <- function() {
     pattern = "*.csv", recursive = TRUE, full.names = TRUE,
     include.dirs = TRUE
   )
+  print(paste("Total files found:", length(csv_files)))
 
   # prepare var to store data
   all_transcripts <- read.csv(csv_files[1])
@@ -111,14 +112,14 @@ prep_inputs <- function() {
 
 # 用于输出文件的函数
 output_input <- function(all_transcripts_param) {
-  write.table(all_transcripts["Paragraph_ID"],
+  write.table(all_transcripts_param["Paragraph_ID"],
     file = "document_ids.txt",
     quote = FALSE,
     append = FALSE,
     row.names = FALSE,
     col.names = FALSE
   )
-  write.table(all_transcripts["text"],
+  write.table(all_transcripts_param["text"],
     file = "documents.txt",
     quote = FALSE,
     append = FALSE,
@@ -129,4 +130,5 @@ output_input <- function(all_transcripts_param) {
 
 # 调用刚才定义的函数
 all_transcripts <- prep_inputs()
+
 output_input(all_transcripts)
