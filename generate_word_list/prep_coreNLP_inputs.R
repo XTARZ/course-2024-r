@@ -7,12 +7,15 @@ prep_inputs <- function() {
   library(tools)
   # goto data location
   setwd(
-    "/home/xtarz/course/The-Role-of-Corporate-Culture-in-Bad-Times/data"
+    file.path(
+      "/", "home", "xtarz", "course",
+      "The-Role-of-Corporate-Culture-in-Bad-Times", "data"
+    )
   )
 
   # read all csv_files
   csv_files <- list.files(
-    path = paste(getwd(), "/pdfs/parsed", sep = ""), # 待优化
+    path = file.path(getwd(), "pdfs", "parsed"),
     pattern = "*.csv", recursive = TRUE, full.names = TRUE,
     include.dirs = TRUE
   )
@@ -73,7 +76,7 @@ prep_inputs <- function() {
   # only use US earnings calls (hand-collected and checked)
   cleaned_meta <-
     read.csv(
-      paste(getwd(), "/meta_data_cleaned.csv", sep = "")
+      file.path(getwd(), "meta_data_cleaned.csv")
     )
 
   # 新增一个列，名为 call_title_date每列的内容是对应列的 call_title拼接日期
