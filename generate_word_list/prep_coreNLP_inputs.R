@@ -85,10 +85,12 @@ prep_inputs <- function() {
       cleaned_meta$"call_title",
       " ",
       # date_EST 形如 4/9/20，转换为2020-04-09
-      format(
-        as.POSIXlt(cleaned_meta$"date_EST", format = "%m/%d/%y"),
-        "%Y-%m-%d"
-      ),
+      # format(
+      #   as.POSIXlt(cleaned_meta$"date_EST", format = "%m/%d/%y"),
+      #   "%Y-%m-%d"
+      # ),
+      cleaned_meta$"date_EST"
+      ,
       sep = ""
     )
 
@@ -103,7 +105,8 @@ prep_inputs <- function() {
 
   # 仅取call_title_date 和 include_sample 两列，组成一个序列
   cleaned_meta <- cleaned_meta[, c("call_title_date", "include_sample")]
-
+  print(all_transcripts$"call_title_date")
+  print(cleaned_meta$"call_title_date")
   # 挑选all_transcripts中call_title_date 相等的列，将对应的include_sample值填入
   all_transcripts <- merge(
     x = all_transcripts,
